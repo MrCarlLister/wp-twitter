@@ -16,7 +16,7 @@
  * Plugin Name:       MRCL Twitter
  * Plugin URI:        https://github.com/MrCarlLister/wp-twitter.git
  * Description:       Plugin for creating bespoke twitter API without the css bloat and functionality restrictions.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Author:            Carl Lister
  * Author URI:        https://mrcarllister.co.uk
  * License:           GPL-2.0+
@@ -35,7 +35,7 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'MR_CL_TWITTER-CUST', '1.0.0' );
+define( 'MR_CL_TWITTER-CUST', '1.0.1' );
 
 /**
  * The code that runs during plugin activation.
