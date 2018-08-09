@@ -1,13 +1,12 @@
 # WP Twitter
 
-Contributors: MrCarlLister
-Donate link: https://mrcarllister.co.uk
-Tags: twitter, api, cron job
-Requires at least: 3.0.1
-Tested up to: 4.9.7
-Stable tag: 4.3
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+* Contributors: MrCarlLister
+* Tags: twitter, api, cron job
+* Requires at least: 3.0.1
+* Tested up to: 4.9.7
+* Stable tag: 4.3
+* License: GPLv2 or later
+* License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Twitter plugin that uses Twitter API, cron job and shortcodes.
 
