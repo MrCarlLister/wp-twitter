@@ -13,7 +13,7 @@
  */
 
 
-$x = file_get_contents('tweets.json');
+$x = file_get_contents(get_template_directory().'/tweets.json');
 $statuses = json_decode($x, true);
 $g = $a['count'];
 

@@ -80,6 +80,7 @@ class Wp_Twitter_Admin {
 
 
         $connection = new TwitterOAuth($consumer_key, $consumer_secret, $access_tok, $access_secret);
+        $connection->setTimeouts(10, 15);
         $statuses = $connection->get("statuses/user_timeline", ["count" => 50,  "include_rts" => false, 'exclude_replies'=>true] );
 
         //Check twitter response for errors.
@@ -88,13 +89,13 @@ class Wp_Twitter_Admin {
             echo "Error encountered: ".$statuses->errors[0]->message." Response code:" .$statuses->errors[0]->code;
         } else {
             // No errors exist. Write tweets to json/txt file.
-            $file = "tweets.json";
+            $file = get_template_directory()."/tweets.json";
             $fh = fopen($file, 'w') or die("can't open file");
             fwrite($fh, json_encode($statuses));
             fclose($fh);
               
             if (file_exists($file)) {
-               // echo $file . " successfully written (" .round(filesize($file)/1024)."KB)";
+                // echo $file . " successfully written (" .round(filesize($file)/1024)."KB)";
             } else {
                 echo "Error encountered. File could not be written.";
             }
@@ -144,9 +145,47 @@ class Wp_Twitter_Admin {
 
         $valid['consumer_key'] =  (isset($input['consumer_key']) && !empty($input['consumer_key'])) ? sanitize_text_field($input['consumer_key']) : '';;
         $valid['consumer_secret'] =  (isset($input['consumer_secret']) && !empty($input['consumer_secret'])) ? sanitize_text_field($input['consumer_secret']) : '';;
-    
+        
+        $this->wp_twitter_feed();
+
         return $valid;
 	 }
+
+    function change( $data ) {
+            $message = null;
+            $type = null;
+
+            if ( null != $data ) {
+
+                if ( false === get_option( 'Twitter settings' ) ) {
+
+                    add_option( 'Twitter settings', $data );
+                    $type = 'updated';
+                    $message = __( 'Successfully saved', 'my-text-domain' );
+
+                } else {
+
+                    update_option( 'Twitter settings', $data );
+                    $type = 'updated';
+                    $message = __( 'Successfully updated', 'my-text-domain' );
+
+                }
+
+            } else {
+
+                $type = 'error';
+                $message = __( 'Data can not be empty', 'my-text-domain' );
+
+            }
+
+            add_settings_error(
+                'wp-twitter',
+                esc_attr( 'settings_updated' ),
+                $message,
+                $type
+            );
+
+        }
 
 
     /**
